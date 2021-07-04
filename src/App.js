@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+
 
 function App() {
+  const [ alphaId, setAlphaId ] = useState(0);
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  
+  const sliderChanged = (id) => {
+    setAlphaId(id)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app">
+      <span id="alpha">
+        { letters[alphaId] }
+      </span>     
+      <div id="slider-container">
+        <Slider
+          min={0}
+          max={letters.length - 1}
+          value={alphaId}
+          onChange={sliderChanged}
+        />
+      </div>
+
+  
     </div>
   );
 }
